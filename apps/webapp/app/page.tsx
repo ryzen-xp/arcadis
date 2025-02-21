@@ -123,7 +123,7 @@ export default function Home() {
               className=" p-6 rounded-xl backdrop-blur-lg relative
 							bg-[#3c07646A] 
 							bg-[linear-gradient(90deg,rgba(255,255,255,0)_10%,rgba(255,255,255,0.08)_50%,rgba(255,255,255,0)_90%)]
-							shadow-[0px_8px_20px_rgba(0,0,0,0.4)]
+							shadow-[0px_2px_5px_rgba(0,0,0,0.1)]
 							text-white w-auto"
             >
               <div className="w-full flex items-center gap-x-4">
