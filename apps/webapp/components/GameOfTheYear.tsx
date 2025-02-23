@@ -43,7 +43,7 @@ const GameOfTheYear = () => {
 
       {/* Title Section */}
       <h2 className="text-white text-2xl font-bold mb-2">
-        Game of the Yearuuu
+        Game of the Year
       </h2>
       <p className="text-gray-400 text-lg mb-6">
         The most outstanding game that pushed boundaries and captivated players
