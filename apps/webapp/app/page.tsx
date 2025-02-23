@@ -5,8 +5,7 @@ import { Input } from '@/components/ui/input'
 import { motion } from 'framer-motion'
 import { ArrowRight, DiscIcon as Discord, Github, Twitter } from 'lucide-react'
 import { useState } from 'react'
-import GameOfTheYear from '@/components/GameOfTheYear'
-import GamingPlatform from '@/components/GamingPlatform/GamingPlatform'
+
 
 export default function Home() {
 	const [email, setEmail] = useState('')
@@ -138,7 +137,6 @@ export default function Home() {
 				</motion.div>
 
 				{/*  */}
-
 				
 			</div>
 		</main>
