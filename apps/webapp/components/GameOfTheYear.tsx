@@ -1,5 +1,4 @@
 import React from 'react';
-import Trophy from "@/public/Trophy.svg"
 
 interface Game {
   title: string;
