@@ -1,5 +1,5 @@
 import React from "react";
-import { Shield, Users, Globe } from "lucide-react";
+import { Shield, Globe } from "lucide-react";
 
 const GamingPlatform = () => {
   return (
@@ -65,7 +65,7 @@ const GamingPlatform = () => {
               </div>
             </div>
             <p className="text-gray-300 text-sm mb-6 leading-relaxed text-center">
-              Every action on Arcadis is secured by Starknet's zk-rollup
+              Every action on Arcadis is secured by Starknet zk-rollup
               technology, ensuring fast and trustworthy interactions.
             </p>
             <ul className="space-y-3 mb-8">
