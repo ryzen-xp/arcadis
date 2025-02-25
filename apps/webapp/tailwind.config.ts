@@ -18,6 +18,11 @@ export default {
 			},
 		},
 		extend: {
+			fontFamily: {
+				sans: ['var(--font-inter)', 'sans-serif'],
+				geist: ['var(--font-geist-sans)', 'sans-serif'],
+				mono: ['var(--font-geist-mono)', 'monospace'],
+			},
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',

@@ -1,11 +1,12 @@
 'use client'
-
-import FeatureSteps from '@/components/FeatureSteps'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { motion } from 'framer-motion'
 import { ArrowRight, DiscIcon as Discord, Github, Twitter } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
+
+import FeatureSteps from '@/components/FeatureSteps'
 
 export default function Home() {
 	const [email, setEmail] = useState('')
@@ -49,6 +50,7 @@ export default function Home() {
 	const handleCtaClick = () => {
 		console.log('CTA Clicked!')
 	}
+
 	return (
 		<main className="min-h-screen relative overflow-hidden bg-[#070B1D]">
 			{/* Background gradient */}
@@ -144,6 +146,58 @@ export default function Home() {
 					))}
 				</motion.div>
 				<FeatureSteps steps={stepsData} ctaText="Register Your Game" onCtaClick={handleCtaClick} />
+
+				{/* Stats */}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.8, delay: 0.2 }}
+					className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl  w-full mt-12"
+				>
+					{[
+						{
+							icon: '/assets/images/teal-icon.svg',
+							headline: 'Curated Games',
+							description:
+								'Discover and explore handpicked Stellar games with in-depth reviews, ratings, and personalized recommendations tailored for you.',
+						},
+						{
+							icon: '/assets/images/purple-icon.svg',
+							headline: 'Community Rewards',
+							description:
+								' Earn tokens, NFTs, and reputation for playing, reviewing, voting, and contributing.',
+						},
+						{
+							icon: '/assets/images/pink-icon.svg',
+							headline: 'Support Innovation',
+							description: 'Help developers crowdfund and grow their games with your engagement.',
+						},
+					].map((feature, i) => (
+						<div
+							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+							key={i}
+							className=" p-6 rounded-xl backdrop-blur-lg relative
+							bg-[#3c07646A] 
+							bg-[linear-gradient(90deg,rgba(255,255,255,0)_10%,rgba(255,255,255,0.08)_50%,rgba(255,255,255,0)_90%)]
+							shadow-[0px_2px_5px_rgba(0,0,0,0.1)]
+							text-white w-auto"
+						>
+							<div className="w-full flex items-center gap-x-4">
+								<Image
+									src={feature.icon || ''}
+									alt={feature.headline}
+									width={48}
+									height={48}
+									quality={90}
+								/>
+								<p className="text-[1.75rem] font-bold">{feature.headline}</p>
+							</div>
+							<p className="font-normal text-[0.95rem] mt-[1rem] text-left">
+								{feature.description}
+							</p>
+						</div>
+					))}
+				</motion.div>
 				{/* Social links */}
 				<motion.div
 					initial={{ opacity: 0 }}

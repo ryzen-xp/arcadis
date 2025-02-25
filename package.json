@@ -3,8 +3,8 @@
 	"version": "0.0.1",
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@commitlint/cli": "^19.7.1",
-		"@commitlint/config-conventional": "^19.7.1",
+		"@commitlint/cli": "^19.6.1",
+		"@commitlint/config-conventional": "^19.6.0",
 		"@types/bun": "latest",
 		"husky": "^9.1.7",
 		"prettier": "^3.5.2"
@@ -36,5 +36,7 @@
 			"**/wagmi/**",
 			"**/pino-pretty/**"
 		]
-	}
+	},
+	"module": "index.ts",
+	"type": "module"
 }
