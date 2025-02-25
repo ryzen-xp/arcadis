@@ -1,12 +1,10 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 import { ArrowRight, DiscIcon as Discord, Github, Twitter } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -143,6 +141,7 @@ export default function Home() {
             </div>
           ))}
         </motion.div>
+
         {/* Social links */}
         <motion.div
           initial={{ opacity: 0 }}
