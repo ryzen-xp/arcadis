@@ -17,7 +17,14 @@ import {
   MonitorPlay,
 } from "lucide-react";
 
+
+import { Menu, Transition } from "@headlessui/react";
+
 const HomeHeroPage: NextPage = () => {
+  const categoryOptions = ["Action", "Adventure", "Puzzle", "Strategy"];
+  const stateOptions = ["Active", "Inactive", "Upcoming"];
+  const frameworkOptions = ["Unity", "Unreal Engine", "Godot"];
+
   return (
     <div className="min-h-screen bg-[#080B27] text-white">
       <Head>
@@ -53,7 +60,7 @@ const HomeHeroPage: NextPage = () => {
             <button className="bg-gradient-to-r from-[#3dadd6] to-[#164E63]   text-white py-3 px-8 rounded-lg transition-all duration-300">
               Explore Games Now
             </button>
-            <button className="bg-transparent border border-gray-600 hover:border-gray-400 text-white py-3 px-8 rounded-lg transition-all duration-300">
+            <button className=" border bg-[#060A32] border-gray-600 hover:border-gray-400 text-white py-3 px-8 rounded-lg transition-all duration-300">
               Register Your Game
             </button>
           </div>
@@ -98,55 +105,223 @@ const HomeHeroPage: NextPage = () => {
             </p>
           </div>
         </section>
-
-        <section className="mb-20">
-          <div className="bg-white rounded-full p-2 flex flex-wrap items-center gap-2 md:gap-0">
+           
+        <section className="mb-20 px-4 sm:px-6 lg:px-8">
+          <div className="bg-white md:rounded-full rounded p-2 flex flex-row items-center gap-2 sm:gap-4 ">
+            
             {/* Search Input */}
             <input
               type="text"
               placeholder="Search Games"
-              className="bg-transparent border-none outline-none pl-4 flex-grow text-black w-full md:w-auto"
+              className="bg-transparent border-none outline-none pl-4 flex-grow text-black w-[50%] h-full sm:w-auto md:rounded-full transition-all"
+              aria-label="Search games"
             />
 
             {/* Buttons and Filters */}
-            <div className="flex flex-wrap items-center gap-2 md:gap-0">
-              {/* Category Dropdown */}
-              <div className="relative mx-2">
-                <button className="flex items-center text-black px-3 py-2">
-                  <span>Choose category</span>
-                  <ChevronDown size={16} className="ml-2" />
-                </button>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+              {/* Mobile Dropdown (Visible only on small screens) */}
+              <div className="sm:hidden">
+                <Menu as="div" className="relative">
+                  <Menu.Button className="flex items-center text-black px-3 py-2 hover:bg-gray-100 rounded-full transition-all">
+                    <span>Filters</span>
+                    <ChevronDown size={16} className="ml-2" />
+                  </Menu.Button>
+                  <Transition
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                      {/* Category Dropdown */}
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div className={`${active ? "bg-gray-100" : ""} p-2`}>
+                            <span className="block text-sm text-gray-700 font-medium px-4 py-2">
+                              Category
+                            </span>
+                            {categoryOptions.map((option) => (
+                              <button
+                                key={option}
+                                className="block w-full px-4 py-2 text-sm text-gray-700 text-left hover:bg-gray-100"
+                              >
+                                {option}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </Menu.Item>
+
+                      {/* State Dropdown */}
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div className={`${active ? "bg-gray-100" : ""} p-2`}>
+                            <span className="block text-sm text-gray-700 font-medium px-4 py-2">
+                              State
+                            </span>
+                            {stateOptions.map((option) => (
+                              <button
+                                key={option}
+                                className="block w-full px-4 py-2 text-sm text-gray-700 text-left hover:bg-gray-100"
+                              >
+                                {option}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </Menu.Item>
+
+                      {/* Framework Dropdown */}
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div className={`${active ? "bg-gray-100" : ""} p-2`}>
+                            <span className="block text-sm text-gray-700 font-medium px-4 py-2">
+                              Framework
+                            </span>
+                            {frameworkOptions.map((option) => (
+                              <button
+                                key={option}
+                                className="block w-full px-4 py-2 text-sm text-gray-700 text-left hover:bg-gray-100"
+                              >
+                                {option}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
               </div>
 
-              {/* Divider */}
-              <div className="h-8 w-px bg-gray-700 mx-1 hidden md:block"></div>
+              {/* Desktop Buttons (Hidden on small screens) */}
+              <div className="hidden sm:flex flex-wrap items-center gap-2 sm:gap-4">
+                {/* Category Dropdown */}
+                <div className="relative">
+                  <Menu as="div" className="relative">
+                    <Menu.Button className="flex items-center text-black px-3 py-2 hover:bg-gray-100 rounded-full transition-all">
+                      <span>Choose category</span>
+                      <ChevronDown size={16} className="ml-2" />
+                    </Menu.Button>
+                    <Transition
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                        {categoryOptions.map((option) => (
+                          <Menu.Item key={option}>
+                            {({ active }) => (
+                              <button
+                                className={`${
+                                  active ? "bg-gray-100" : ""
+                                } block w-full px-4 py-2 text-sm text-gray-700 text-left`}
+                              >
+                                {option}
+                              </button>
+                            )}
+                          </Menu.Item>
+                        ))}
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                </div>
 
-              {/* State Dropdown */}
-              <div className="relative mx-2">
-                <button className="flex items-center text-black px-3 py-2">
-                  <span>Choose state</span>
-                  <ChevronDown size={16} className="ml-2" />
-                </button>
+                {/* Divider */}
+                <div className="h-8 w-px bg-gray-300"></div>
+
+                {/* State Dropdown */}
+                <div className="relative">
+                  <Menu as="div" className="relative">
+                    <Menu.Button className="flex items-center text-black px-3 py-2 hover:bg-gray-100 rounded-full transition-all">
+                      <span>Choose state</span>
+                      <ChevronDown size={16} className="ml-2" />
+                    </Menu.Button>
+                    <Transition
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                        {stateOptions.map((option) => (
+                          <Menu.Item key={option}>
+                            {({ active }) => (
+                              <button
+                                className={`${
+                                  active ? "bg-gray-100" : ""
+                                } block w-full px-4 py-2 text-sm text-gray-700 text-left`}
+                              >
+                                {option}
+                              </button>
+                            )}
+                          </Menu.Item>
+                        ))}
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                </div>
+
+                {/* Divider */}
+                <div className="h-8 w-px bg-gray-300"></div>
+
+                {/* Framework Dropdown */}
+                <div className="relative">
+                  <Menu as="div" className="relative">
+                    <Menu.Button className="flex items-center text-black px-3 py-2 hover:bg-gray-100 rounded-full transition-all">
+                      <span>Framework</span>
+                      <ChevronDown size={16} className="ml-2" />
+                    </Menu.Button>
+                    <Transition
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                        {frameworkOptions.map((option) => (
+                          <Menu.Item key={option}>
+                            {({ active }) => (
+                              <button
+                                className={`${
+                                  active ? "bg-gray-100" : ""
+                                } block w-full px-4 py-2 text-sm text-gray-700 text-left`}
+                              >
+                                {option}
+                              </button>
+                            )}
+                          </Menu.Item>
+                        ))}
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                </div>
               </div>
 
-              {/* Divider */}
-              <div className="h-8 w-px bg-gray-700 mx-1 hidden md:block"></div>
-
-              {/* Framework Dropdown */}
-              <div className="relative mx-2">
-                <button className="flex items-center text-black px-3 py-2">
-                  <span>Framework</span>
-                  <ChevronDown size={16} className="ml-2" />
-                </button>
-              </div>
-
-              {/* Search Button */}
-              <button className="bg-blue-500 hover:bg-blue-600 p-3 rounded-full text-white ml-2">
+              
+            </div>
+            {/* Search Button */}
+            <button
+                className="bg-blue-500 hover:bg-blue-600 p-3 rounded-full text-white transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label="Search"
+              >
                 <Search size={20} />
               </button>
-            </div>
           </div>
         </section>
+
+
+
+
 
         {/* Categories Section */}
         <section className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-6 text-center">
