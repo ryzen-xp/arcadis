@@ -6,8 +6,6 @@ import { ArrowRight, DiscIcon as Discord, Github, Twitter } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-
-
 export default function Home() {
   const [email, setEmail] = useState("");
 
@@ -143,7 +141,6 @@ export default function Home() {
             </div>
           ))}
         </motion.div>
-
 
         {/* Social links */}
         <motion.div
