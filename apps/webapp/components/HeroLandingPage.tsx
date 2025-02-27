@@ -61,7 +61,8 @@ const HomeHeroPage: NextPage = () => {
 
         {/* Features Section */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          <div className="bg-gradient-to-br from-[#10123E] to-[#171A4D] p-6 rounded-xl">
+          <div className="bg-[#3c07646A]  bg-[linear-gradient(90deg,rgba(255,255,255,0)_10%,rgba(255,255,255,0.08)_50%,rgba(255,255,255,0)_90%)]
+							shadow-[0px_2px_5px_rgba(0,0,0,0.1)] p-6 rounded-xl">
             <div className="bg-teal-500 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
               <Gamepad2 className="text-white" size={24} />
             </div>
@@ -73,7 +74,8 @@ const HomeHeroPage: NextPage = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-[#10123E] to-[#171A4D] p-6 rounded-xl">
+          <div className="bg-[#3c07646A]  bg-[linear-gradient(90deg,rgba(255,255,255,0)_10%,rgba(255,255,255,0.08)_50%,rgba(255,255,255,0)_90%)]
+							shadow-[0px_2px_5px_rgba(0,0,0,0.1)] p-6 rounded-xl">
             <div className="bg-purple-500 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
               <Users className="text-white" size={24} />
             </div>
@@ -84,7 +86,8 @@ const HomeHeroPage: NextPage = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-[#10123E] to-[#171A4D] p-6 rounded-xl">
+          <div className="bg-[#3c07646A]  bg-[linear-gradient(90deg,rgba(255,255,255,0)_10%,rgba(255,255,255,0.08)_50%,rgba(255,255,255,0)_90%)]
+							shadow-[0px_2px_5px_rgba(0,0,0,0.1)] p-6 rounded-xl">
             <div className="bg-pink-500 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
               <Lightbulb className="text-white" size={24} />
             </div>
