@@ -19,10 +19,10 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ["var(--font-inter)", "sans-serif"],
-				geist: ["var(--font-geist-sans)", "sans-serif"],
-				mono: ["var(--font-geist-mono)", "monospace"],
-			  },
+				sans: ['var(--font-inter)', 'sans-serif'],
+				geist: ['var(--font-geist-sans)', 'sans-serif'],
+				mono: ['var(--font-geist-mono)', 'monospace'],
+			},
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
@@ -64,7 +64,6 @@ export default {
 					'4': 'hsl(var(--chart-4))',
 					'5': 'hsl(var(--chart-5))',
 				},
-				
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
