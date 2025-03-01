@@ -17,7 +17,6 @@ import {
   MonitorPlay,
 } from "lucide-react";
 
-
 import { Menu, Transition } from "@headlessui/react";
 
 const HomeHeroPage: NextPage = () => {

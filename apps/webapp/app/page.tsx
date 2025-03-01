@@ -8,6 +8,7 @@ import { useState } from 'react'
 
 import FeatureSteps from '@/components/FeatureSteps'
 import SearchGamesBar from '@/components/SearchGamesBar'
+import HomeHeroPage from '@/components/HeroLandingPage'
 
 export default function Home() {
 	const [email, setEmail] = useState('')
@@ -225,6 +226,7 @@ export default function Home() {
 					))}
 				</motion.div>
 			</div>
+			<HomeHeroPage/>
 		</main>
 	)
 
