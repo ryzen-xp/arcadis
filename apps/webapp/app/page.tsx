@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 import FeatureSteps from '@/components/FeatureSteps'
+import SearchGamesBar from '@/components/SearchGamesBar'
 
 export default function Home() {
 	const [email, setEmail] = useState('')
@@ -145,6 +146,7 @@ export default function Home() {
 						</div>
 					))}
 				</motion.div>
+				<SearchGamesBar />
 				<FeatureSteps steps={stepsData} ctaText="Register Your Game" onCtaClick={handleCtaClick} />
 
 				{/* Stats */}
