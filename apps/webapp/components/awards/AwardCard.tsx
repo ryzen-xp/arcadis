@@ -27,6 +27,13 @@ export default function AwardCard({
       <div
         className="bg-[#1F2937] border border-gray-800 rounded-lg p-4 cursor-pointer hover:bg-[#283446] transition-colors"
         onClick={() => console.log(`Navigating to ${name} details...`)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            console.log(`Navigating to ${name} details...`);
+          }
+        }}
+        role="button"
+        tabIndex={0}
       >
         <div className="text-[#9CA3AF] text-sm mb-2">{type}</div>
         <div className="flex items-start">
