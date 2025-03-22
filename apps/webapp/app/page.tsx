@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { motion } from 'framer-motion'
@@ -7,8 +7,8 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 import FeatureSteps from '@/components/FeatureSteps'
-import SearchGamesBar from '@/components/SearchGamesBar'
 import HomeHeroPage from '@/components/HeroLandingPage'
+import SearchGamesBar from '@/components/SearchGamesBar'
 
 export default function Home() {
 	const [email, setEmail] = useState('')
@@ -226,8 +226,6 @@ export default function Home() {
 					))}
 				</motion.div>
 			</div>
-			<HomeHeroPage/>
 		</main>
 	)
-
 }
