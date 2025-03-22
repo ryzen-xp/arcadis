@@ -1,6 +1,5 @@
 import React from 'react'
 import GameCard from '../ui/GameCard'
-import AvaterImg from "../../public/gameAvater.png"
 
 const GameCatalog = () => {
     const stellarOdysseyProps = {
