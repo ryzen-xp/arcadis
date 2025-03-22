@@ -5,7 +5,7 @@ interface MonthlyAwardsProps {
 	year: string
 	icon: string
 	backgroundColor: string
-	awards: [MonthlyAwardCardProps]
+	awards: MonthlyAwardCardProps[]
 	maxCategories: number
 	showIcons: boolean
 	cardShape: string //in px to specify roundness
@@ -30,7 +30,7 @@ export default function MonthlyAwards({
 			<div className="flex flex-col space-y-3 mt-5">
 				{awards?.map((award) => (
 					<MonthlyAwardCard
-						key={`${award.name}-${award.date}`}
+						key={`${award.categoryName}-${award.winnerName}`}
 						{...award}
 						showIcon={showIcons}
 						cardShape={cardShape}
@@ -41,6 +41,7 @@ export default function MonthlyAwards({
 	)
 }
 interface MonthlyAwardCardProps {
+	id: string
 	categoryIcon: string
 	iconBackgroundColor: string
 	categoryName: string

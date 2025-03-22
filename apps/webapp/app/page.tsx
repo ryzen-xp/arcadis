@@ -7,7 +7,6 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 import FeatureSteps from '@/components/FeatureSteps'
-import HomeHeroPage from '@/components/HeroLandingPage'
 import SearchGamesBar from '@/components/SearchGamesBar'
 
 export default function Home() {
