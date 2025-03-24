@@ -11,9 +11,9 @@ const navigation = [
 ]
 
 const awardOptions = [
-  { name: 'Option 1', href: '/awards/option1' },
-  { name: 'Option 2', href: '/awards/option2' },
-  { name: 'Option 3', href: '/awards/option3' }
+  { name: 'Hall of Fame', href: '/awards/halloffame' },
+  { name: 'Monthly Award', href: '/awards/monthlyaward' },
+  { name: 'Nominations', href: '/awards/nominations' }
 ]
 
 export function Header() {
