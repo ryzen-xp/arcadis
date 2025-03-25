@@ -1,11 +1,12 @@
 'use client'
 import NewsCard from '@/components/ui/newscard'
 import { motion } from 'framer-motion'
+import { PageWrapper } from '@/components/PageWrapper'
 import data from './data'
 
 const News = () => {
 	return (
-		<main className="min-h-screen relative bg-[#070B1D] p-8">
+		<PageWrapper>
 			<div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
 			<motion.div className="max-w-7xl mx-auto">
 				<h1 className="text-white font-semibold text-3xl mb-8 pl-2">News</h1>
@@ -29,7 +30,7 @@ const News = () => {
 					)}
 				</div>
 			</motion.div>
-		</main>
+		</PageWrapper>
 	)
 }
 export default News

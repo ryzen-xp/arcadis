@@ -1,7 +1,10 @@
+'use client'
+
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { Menu } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import { useMenu } from '@/context/MenuContext'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -17,16 +20,22 @@ const awardOptions = [
 ]
 
 export function Header() {
+  const { isMenuOpen, setIsMenuOpen } = useMenu()
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#13163A] backdrop-blur-sm border-b border-white/10 font-inter">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="flex h-16 items-center justify-between">
           {/* Mobile Menu Button (Left) */}
           <div className="flex md:hidden items-center w-[100px]">
-            <DropdownMenu.Root>
+            <DropdownMenu.Root open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <DropdownMenu.Trigger asChild>
                 <button className="p-2 text-white hover:bg-white/5 rounded-md transition-colors">
-                  <Menu className="h-6 w-6" />
+                  {isMenuOpen ? (
+                    <X className="h-6 w-6" />
+                  ) : (
+                    <Menu className="h-6 w-6" />
+                  )}
                 </button>
               </DropdownMenu.Trigger>
 
