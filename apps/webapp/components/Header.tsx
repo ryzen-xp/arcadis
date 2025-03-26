@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { useMenu } from '@/context/MenuContext'
 
 const navigation = [
@@ -20,7 +20,7 @@ const awardOptions = [
 ]
 
 export function Header() {
-  const { isMenuOpen, setIsMenuOpen } = useMenu()
+  const { isMenuOpen, setIsMenuOpen, isAwardsOpen, setIsAwardsOpen } = useMenu()
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#13163A] backdrop-blur-sm border-b border-white/10 font-inter">
@@ -57,16 +57,22 @@ export function Header() {
                       </DropdownMenu.Item>
                     ))}
                     
-                    {/* Awards Submenu */}
-                    <DropdownMenu.Sub>
-                      <DropdownMenu.SubTrigger className="flex w-full items-center justify-between px-3 py-2 text-[13.67px] leading-[20px] font-medium text-white hover:text-white/90 hover:bg-white/5 rounded-md transition-colors tracking-[0%]">
+                    {/* Awards Menu Mobile */}
+                    <div className="space-y-1">
+                      <button 
+                        onClick={() => setIsAwardsOpen(!isAwardsOpen)}
+                        className="flex w-full items-center justify-between px-3 py-2 text-[13.67px] leading-[20px] font-medium text-white hover:text-white/90 hover:bg-white/5 rounded-md transition-colors tracking-[0%]"
+                      >
                         <span>Awards</span>
-                        <span className="text-xs">▾</span>
-                      </DropdownMenu.SubTrigger>
-                      <DropdownMenu.Portal>
-                        <DropdownMenu.SubContent
-                          className="w-full bg-[#13163A] p-1 shadow-lg border border-white/10 ml-2"
-                        >
+                        {isAwardsOpen ? (
+                          <ChevronUp className="h-4 w-4" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4" />
+                        )}
+                      </button>
+                      
+                      {isAwardsOpen && (
+                        <div className="pl-4 space-y-1 border-l border-white/10 ml-3">
                           {awardOptions.map((option) => (
                             <DropdownMenu.Item key={option.name}>
                               <Link
@@ -77,9 +83,9 @@ export function Header() {
                               </Link>
                             </DropdownMenu.Item>
                           ))}
-                        </DropdownMenu.SubContent>
-                      </DropdownMenu.Portal>
-                    </DropdownMenu.Sub>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </DropdownMenu.Content>
               </DropdownMenu.Portal>
@@ -108,7 +114,7 @@ export function Header() {
               </Link>
             ))}
             
-            {/* Awards Dropdown */}
+            {/* Awards Dropdown Desktop */}
             <DropdownMenu.Root>
               <DropdownMenu.Trigger asChild>
                 <button className="flex items-center gap-1 text-[13.67px] leading-[20px] font-medium text-white hover:text-white/90 transition-colors tracking-[0%] text-center px-3 py-2 rounded-md">
@@ -140,10 +146,7 @@ export function Header() {
 
           {/* Connect Button */}
           <div className="flex items-center w-[100px] justify-end">
-            <button
-              type="button"
-              className="bg-gradient-to-r from-[#3B82F6] to-[#0E7490] text-white px-8 py-2 rounded-full text-[13.67px] leading-[20px] font-medium transition-all duration-300 hover:opacity-90 tracking-[0%] text-center"
-            >
+            <button className="bg-gradient-to-r from-[#3B82F6] to-[#0E7490] text-white px-4 py-2 rounded-full text-[13.67px] leading-[20px] font-medium transition-all duration-300 hover:opacity-90">
               Connect
             </button>
           </div>
