@@ -27,7 +27,11 @@
 		"prepare": "[ \"$VERCEL\" != \"1\" ] && husky install || echo \"Skipping husky install\""
 	},
 	"workspaces": {
-		"packages": ["apps/*", "services/*", "packages/*"],
+		"packages": [
+			"apps/*",
+			"services/*",
+			"packages/*"
+		],
 		"nohoist": [
 			"**/cbw-sdk",
 			"**/cbw-sdk/**",
@@ -40,6 +44,8 @@
 	"module": "index.ts",
 	"type": "module",
 	"dependencies": {
-		"@headlessui/react": "^2.2.0"
+		"@headlessui/react": "^2.2.0",
+		"@radix-ui/react-toast": "^1.2.6",
+		"tailwindcss-animate": "^1.0.7"
 	}
 }
