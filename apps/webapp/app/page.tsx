@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, DiscIcon as Discord, Github, Twitter } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import { PageWrapper } from '@/components/PageWrapper'
 import GameInfoCard from '@/components/gamecardinfo'
 import FeatureSteps from '@/components/FeatureSteps'
 import SearchGamesBar from '@/components/SearchGamesBar'
@@ -53,7 +54,7 @@ export default function Home() {
 	}
 
 	return (
-		<main className="min-h-screen relative overflow-hidden bg-[#070B1D]">
+		<PageWrapper className="overflow-hidden">
 			{/* Background gradient */}
 			<div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
 
@@ -225,6 +226,7 @@ export default function Home() {
 					))}
 				</motion.div>
 			</div>
+		</PageWrapper>
 			<GameInfoCard
 				image="https://yourimage.com/game.jpg"
 				title="Eternal Legends"
@@ -238,6 +240,5 @@ export default function Home() {
 				platforms={["PC", "PlayStation", "Xbox"]}
 				showFeedback={true}
 			/>
-		</main>
 	)
 }
