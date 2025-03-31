@@ -1,52 +1,52 @@
 const data = [
 	{
-		imageUrl: '/assets/sampleImage.jpg',
+		imageUrl: '/assets/news/news-1.jpeg',
 		imageAlt: 'logo',
 		aspectRatio: '16:9',
-		headline: 'First Heading',
+		headline: 'Starknet Gaming Hub Reaches 100K Daily Active Players',
 		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam cum nobis suscipit voluptatibus id eligendi pariatur sequi, assumenda consequuntur eius earum facere nisi labore, quae quis rem iure esse dignissimos?',
+			'The decentralized gaming ecosystem on Starknet has hit a major milestone with over',
 		category: 'ECOSYSTEM',
 		date: '21-02-2025',
 	},
 	{
-		imageUrl: '/assets/sampleImage.jpg',
+		imageUrl: '/assets/news/news-2.jpeg',
 		imageAlt: 'logo',
 		aspectRatio: '16:9',
-		headline: 'Second Heading',
+		headline: 'New Cross-Chain Gaming Alliance Formed Between Major L2s',
 		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam cum nobis suscipit voluptatibus id eligendi pariatur sequi, assumenda consequuntur eius earum facere nisi labore, quae quis rem iure esse dignissimos?',
-		category: 'ECOSYSTEM',
+			'A groundbreaking partnership between leading Layer 2 platforms aims to create seamless',
+		category: 'PARTNERSHIP',
 		date: '21-02-2025',
 	},
 	{
-		imageUrl: '/assets/sampleImage.jpg',
+		imageUrl: '/assets/news/news-3.png',
 		imageAlt: 'logo',
 		aspectRatio: '16:9',
-		headline: 'Third Heading',
+		headline: 'Zero-Knowledge Gaming: The Next Frontier in Online Privacy',
 		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam cum nobis suscipit voluptatibus id eligendi pariatur sequi, assumenda consequuntur eius earum facere nisi labore, quae quis rem iure esse dignissimos?',
-		category: 'UPDATE',
-		date: '21-02-2025',
-	},
-	{
-		imageUrl: '/assets/sampleImage.jpg',
-		imageAlt: 'logo',
-		aspectRatio: '16:9',
-		headline: 'Fourth Heading',
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam cum nobis suscipit voluptatibus id eligendi pariatur sequi, assumenda consequuntur eius earum facere nisi labore, quae quis rem iure esse dignissimos?',
-		category: 'UPDATE',
-		date: '21-02-2025',
-	},
-	{
-		imageUrl: '/assets/sampleImage.jpg',
-		imageAlt: 'logo',
-		aspectRatio: '16:9',
-		headline: 'Fifth Heading',
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam cum nobis suscipit voluptatibus id eligendi pariatur sequi, assumenda consequuntur eius earum facere nisi labore, quae quis rem iure esse dignissimos?',
+			'Game developers are increasingly adopting zero-knowledge proofs to enhance player',
 		category: 'TECHNOLOGY',
+		date: '21-02-2025',
+	},
+	{
+		imageUrl: '/assets/news/news-4.jpeg',
+		imageAlt: 'logo',
+		aspectRatio: '16:9',
+		headline: 'Major Studio Announces First AAA Game Built on Starknet',
+		description:
+			'A leading game studio has revealed plans to launch their upcoming RPG title exclusively on',
+		category: 'ANNOUNCEMENTS',
+		date: '21-02-2025',
+	},
+	{
+		imageUrl: '/assets/news/news-5.jpeg',
+		imageAlt: 'logo',
+		aspectRatio: '16:9',
+		headline: 'Gaming DAOs See Record Growth in Q1 2025',
+		description:
+			'Decentralized gaming organizations have experienced unprecedented growth, with over',
+		category: 'REPORTS',
 		date: '21-02-2025',
 	},
 ]
