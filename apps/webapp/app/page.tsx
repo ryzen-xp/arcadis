@@ -201,6 +201,22 @@ export default function Home() {
 						</div>
 					))}
 				</motion.div>
+				
+				{/* Game Info Card */}
+				<GameInfoCard
+					image="https://yourimage.com/game.jpg"
+					title="Eternal Legends"
+					developer={{ name: "Blockchain Gaming Inc", url: "#", logo: "https://yourlogo.com/logo.png" }}
+					rating={9}
+					status="active"
+					description="Enter a persistent world where every player's actions leave a lasting impact."
+					players={800000}
+					community={1500000}
+					categories={["MMORPG", "BLOCKCHAIN", "FANTASY"]}
+					platforms={["PC", "PlayStation", "Xbox"]}
+					showFeedback={true}
+				/>
+				
 				{/* Social links */}
 				<motion.div
 					initial={{ opacity: 0 }}
@@ -227,18 +243,5 @@ export default function Home() {
 				</motion.div>
 			</div>
 		</PageWrapper>
-			<GameInfoCard
-				image="https://yourimage.com/game.jpg"
-				title="Eternal Legends"
-				developer={{ name: "Blockchain Gaming Inc", url: "#", logo: "https://yourlogo.com/logo.png" }}
-				rating={9}
-				status="active"
-				description="Enter a persistent world where every player's actions leave a lasting impact."
-				players={800000}
-				community={1500000}
-				categories={["MMORPG", "BLOCKCHAIN", "FANTASY"]}
-				platforms={["PC", "PlayStation", "Xbox"]}
-				showFeedback={true}
-			/>
 	)
 }
