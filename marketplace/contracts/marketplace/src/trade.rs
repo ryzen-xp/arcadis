@@ -1,6 +1,7 @@
 #![no_std]
 use soroban_sdk::{Address, Env, Map, String, Symbol, Vec};
 
+use crate::escrow::{deposit_escrow, withdraw_escrow};
 use crate::utils::{DataKey, Error, GameItem, TradeHistory, TradeOffer};
 
 pub fn create_trade_offer(
@@ -113,21 +114,30 @@ pub fn execute_trade(e: Env, item_id: String, buyer: Address) -> Result<(), Erro
     if offer.seller == buyer {
         return Err(Error::InvalidCaller);
     }
-
     if !offer.is_active {
         return Err(Error::OfferNotActive);
     }
 
+    //  Deposit buyer's payment into escrow
+    deposit_escrow(&e, buyer.clone(), offer.price)?;
+
+    //  Transfer item to buyer
     item.owner = buyer.clone();
     items.set(item_id.clone(), item.clone());
     e.storage().instance().set(&items_key, &items);
 
+    //  Remove the trade offer and listing
     trade_offer.remove(item_id.clone());
     e.storage().instance().set(&trade_offer_key, &trade_offer);
 
     listed.set(item_id.clone(), false);
     e.storage().instance().set(&listed_key, &listed);
 
+    //  Transfer escrowed funds to seller
+    withdraw_escrow(&e, buyer.clone(), offer.price)?;
+    deposit_escrow(&e, offer.seller.clone(), offer.price)?;
+
+    // TRADE HISTORY
     let history_entry = TradeHistory {
         seller: offer.seller.clone(),
         buyer: buyer.clone(),
@@ -135,13 +145,13 @@ pub fn execute_trade(e: Env, item_id: String, buyer: Address) -> Result<(), Erro
         timestamp: e.ledger().timestamp(),
     };
 
-    // Push to history list
     let mut item_histories = histories.get(item_id.clone()).unwrap_or(Vec::new(&e));
     item_histories.push_back(history_entry);
     histories.set(item_id.clone(), item_histories);
 
     e.storage().instance().set(&trade_history_key, &histories);
 
+    // EVENTS
     e.events()
         .publish((Symbol::new(&e, "trade_executed"), buyer.clone()), item);
 

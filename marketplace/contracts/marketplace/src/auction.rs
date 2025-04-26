@@ -1,8 +1,7 @@
 #![no_std]
-use core::{error, ops::Add};
-
-use crate::utils::{Auction, DataKey, Error, GameItem, TradeOffer};
 use soroban_sdk::{Address, Env, Map, String, Symbol};
+
+use crate::utils::{Auction, DataKey, Error, GameItem};
 
 pub fn start_auction(
     e: Env,
@@ -199,7 +198,7 @@ pub fn cancel_auction(e: Env, item_id: String, seller: Address) -> Result<(), Er
         None => return Err(Error::AuctionNotFound),
     };
 
-    let mut auction = match auctions.get(item_id.clone()) {
+    let auction = match auctions.get(item_id.clone()) {
         Some(x) => x,
         None => return Err(Error::AuctionNotFound),
     };
@@ -211,7 +210,6 @@ pub fn cancel_auction(e: Env, item_id: String, seller: Address) -> Result<(), Er
         return Err(Error::InvalidCaller);
     }
 
-    // Only allow cancel if no other bidder placed bid (means highest_bidder is seller itself)
     if auction.highest_bidder != seller {
         return Err(Error::BidAlreadyPlaced);
     }
@@ -219,7 +217,7 @@ pub fn cancel_auction(e: Env, item_id: String, seller: Address) -> Result<(), Er
     auctions.remove(item_id.clone());
     e.storage().instance().set(&auction_key, &auctions);
 
-    // Emit cancellation event
+    // Emit
     e.events().publish(
         (Symbol::new(&e, "Auction_cancelled"), item_id.clone()),
         seller,
