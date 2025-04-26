@@ -32,25 +32,20 @@ impl Marketplace {
 
         Ok(())
     }
+    // set nnew token address 
+    pub fn set_token_address(e: Env, admin: Address, new_token: Address) -> Result<(), Error> {
+      admin.require_auth();
+      let admin_key = DataKey::Admin;
+      let token_key = DataKey::TokenAddress;
+      let current_admin: Address = e.storage().instance().get(&admin_key).ok_or(Error::NotInitialized)?;
+      if current_admin != admin {
+          return Err(Error::InvalidCaller);
+      }
+      e.storage().instance().set(&token_key, &new_token);
+      e.events().publish((Symbol::new(&e , "new_token_address_set"), admin), new_token);
 
-    pub fn set_token(e: Env, admin: Address, new_token: Address) -> Result<(), Error> {
-        admin.require_auth();
-        let admin_key = DataKey::Admin;
-        let token_key = DataKey::TokenAddress;
-        let current_admin: Address = e
-            .storage()
-            .instance()
-            .get(&admin_key)
-            .ok_or(Error::NotInitialized)?;
-        if current_admin != admin {
-            return Err(Error::InvalidCaller);
-        }
-        e.storage().instance().set(&token_key, &new_token);
-        e.events()
-            .publish((Symbol::new(&e, "new_token_address_set"), admin), new_token);
-
-        Ok(())
-    }
+      Ok(())
+  }
     // List an item for sale
     pub fn list_for_sale(
         e: Env,
@@ -66,7 +61,7 @@ impl Marketplace {
         cancel_trade_offer(e, item_id, seller)
     }
 
-    // Finalize a peer-to-peer trade (with escrow fund release)
+    // Finalize a peer-to-peer trade 
     pub fn p2p_execute_trade(e: Env, item_id: String, buyer: Address) -> Result<(), utils::Error> {
         execute_trade(e, item_id, buyer)
     }
