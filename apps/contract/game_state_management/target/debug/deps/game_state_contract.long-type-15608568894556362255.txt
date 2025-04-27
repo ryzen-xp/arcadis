@@ -1,0 +1,1 @@
+Cloned<Filter<UnwrappedIter<soroban_sdk::vec::VecTryIter<GameEvent>, GameEvent, ConversionError>, {closure@src/events.rs:39:26: 39:29}>>
