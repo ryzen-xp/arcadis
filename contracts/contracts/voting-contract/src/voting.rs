@@ -2,12 +2,13 @@ use crate::errors::Error;
 use crate::events::*;
 use crate::traits::VotingTrait;
 use soroban_sdk::{
-    contract, contractimpl, contracttype, panic_with_error, Address, Env, IntoVal, String, Val,
+    contract, contractimpl, contracttype, panic_with_error, Address, Env, IntoVal, String, Symbol,
+    Val,
 };
 
 /// Main contract definition.
 #[contract]
-pub struct Contract;
+pub struct VotingContract;
 
 /// Struct representing a Game.
 #[contracttype]
@@ -30,7 +31,7 @@ enum DataKey {
 
 /// Contract implementation of the VotingTrait
 #[contractimpl]
-impl VotingTrait for Contract {
+impl VotingTrait for VotingContract {
     /// Adds a new game to the system.
     fn add_game(env: Env, creator: Address, name: String) {
         creator.require_auth(); // Ensure caller is authenticated
@@ -58,8 +59,10 @@ impl VotingTrait for Contract {
         Self::_save_total_games(&env, &game_id);
 
         // Emit event signaling new game added
-        env.events()
-            .publish((GAME, ADD), NewGameAdded { game_id, creator });
+        env.events().publish(
+            (Symbol::new(&env, "gnew_game_added"), creator.clone()),
+            NewGameAdded { game_id, creator },
+        );
     }
 
     /// Allows a user to vote for a specific game.
@@ -85,8 +88,10 @@ impl VotingTrait for Contract {
         Self::_register_vote(&env, voter.clone(), game_id.clone()); // Mark user as voted
 
         // Emit event signaling vote registration
-        env.events()
-            .publish((GAME, VOTE), VoteRegistered { game_id, voter });
+        env.events().publish(
+            (Symbol::new(&env, "new_vote_registered"), voter.clone()),
+            VoteRegistered { game_id, voter },
+        );
     }
 
     /// Checks if a user has already voted for a game.
@@ -122,7 +127,7 @@ impl VotingTrait for Contract {
     }
 }
 
-impl Contract {
+impl VotingContract {
     /// Internal helper to fetch a game from storage.
     fn _get_game(env: &Env, game_id: u32) -> Option<Game> {
         env.storage()
