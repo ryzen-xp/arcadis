@@ -4,22 +4,24 @@ use soroban_sdk::{contracterror, ConversionError};
 #[contracterror]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
 #[repr(u32)]
-pub enum GameReviewError {
+pub enum GameAssetError {
     /// Contract has already been initialized
     AlreadyInitialized = 1,
     /// User does not have permission for this action
     Unauthorized = 2,
     /// Input parameters are invalid or out of allowed range
     InvalidInput = 3,
-    /// The requested review does not exist
-    ReviewNotFound = 4,
-    /// User has already submitted a review for this game
-    UserHasReviewed = 5,
+    /// The requested asset does not exist
+    AssetNotFound = 4,
+    /// The asset ID already exists
+    AssetAlreadyRegistered = 5,
+    /// The attempted operation is not allowed
+    OperationNotAllowed = 6,
 }
 
-/// Implementation to convert ConversionError to GameReviewError
-impl From<ConversionError> for GameReviewError {
+/// Implementation to convert ConversionError to GameAssetError
+impl From<ConversionError> for GameAssetError {
     fn from(_: ConversionError) -> Self {
-        GameReviewError::InvalidInput
+        GameAssetError::InvalidInput
     }
 }
