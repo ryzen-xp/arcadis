@@ -14,10 +14,10 @@ mod trade;
 mod utils;
 
 #[contract]
-pub struct Marketplace;
+pub struct MarketplaceContract;
 
 #[contractimpl]
-impl Marketplace {
+impl MarketplaceContract {
     pub fn initialize(e: Env, admin: Address, token: Address) -> Result<(), Error> {
         let admin_key = DataKey::Admin;
         let token_key = DataKey::TokenAddress;
