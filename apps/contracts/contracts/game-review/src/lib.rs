@@ -1,5 +1,11 @@
 #![no_std]
 
+/// Game Review smart contract for managing Arcadis user reviews
+///
+/// This contract allows:
+/// - Users to submit game reviews with ratings (1-5) and comments
+/// - Admins to moderate content by deleting inappropriate reviews
+/// - Anyone to query reviews and game ratings
 pub mod errors;
 pub mod events;
 pub mod interface;
@@ -14,11 +20,20 @@ use interface::GameReviewTrait;
 use storage::GameReviewStorage;
 use types::Review;
 
+/// Game Review smart contract main implementation
 #[contract]
 pub struct GameReview;
 
 #[contractimpl]
 impl GameReviewTrait for GameReview {
+    /// Initializes the contract with an admin address
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    /// * `admin` - The address to be set as admin
+    ///
+    /// # Returns
+    /// * `Result<(), GameReviewError>` - Ok if initialized, Error if already initialized
     fn initialize(env: Env, admin: Address) -> Result<(), GameReviewError> {
         // Check if contract is already initialized
         if env.storage().instance().has(&types::DataKey::Admin) {
@@ -34,6 +49,17 @@ impl GameReviewTrait for GameReview {
         Ok(())
     }
 
+    /// Changes the contract admin to a new address
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    /// * `new_admin` - The address of the new admin
+    ///
+    /// # Returns
+    /// * `Result<(), GameReviewError>` - Ok if admin changed, Error if unauthorized
+    ///
+    /// # Authentication
+    /// * Requires authorization from current admin
     fn change_admin(env: Env, new_admin: Address) -> Result<(), GameReviewError> {
         let old_admin = Self::require_admin(&env)?;
 
@@ -49,6 +75,20 @@ impl GameReviewTrait for GameReview {
         Ok(())
     }
 
+    /// Adds a review for a game
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    /// * `user` - The address of the reviewer
+    /// * `game_id` - Unique identifier for the game
+    /// * `rating` - Rating value (1-5 stars)
+    /// * `comment` - Text content of the review
+    ///
+    /// # Returns
+    /// * `Result<(), GameReviewError>` - Ok if added, Error if invalid input or already reviewed
+    ///
+    /// # Authentication
+    /// * Requires authorization from the user
     fn add_review(
         env: Env,
         user: Address,
@@ -108,6 +148,18 @@ impl GameReviewTrait for GameReview {
         Ok(())
     }
 
+    /// Deletes a review from the system
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    /// * `game_id` - Unique identifier for the game
+    /// * `review_id` - Identifier for the specific review
+    ///
+    /// # Returns
+    /// * `Result<(), GameReviewError>` - Ok if deleted, Error if not found or unauthorized
+    ///
+    /// # Authentication
+    /// * Requires authorization from admin
     fn delete_review(env: Env, game_id: u32, review_id: u32) -> Result<(), GameReviewError> {
         // Only admin can delete a review
         let admin = Self::require_admin(&env)?;
@@ -159,6 +211,15 @@ impl GameReviewTrait for GameReview {
         Ok(())
     }
 
+    /// Gets a specific review by game and user
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    /// * `game_id` - Unique identifier for the game
+    /// * `user` - Address of the reviewer
+    ///
+    /// # Returns
+    /// * `Result<Review, GameReviewError>` - Review if found, Error if not found
     fn get_review(env: Env, game_id: u32, user: Address) -> Result<Review, GameReviewError> {
         if !Self::has_reviewed(env.clone(), user.clone(), game_id) {
             return Err(GameReviewError::ReviewNotFound);
@@ -167,6 +228,16 @@ impl GameReviewTrait for GameReview {
         Ok(GameReviewStorage::get_review(&env, game_id, &user))
     }
 
+    /// Gets a paginated list of reviews for a game
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    /// * `game_id` - Unique identifier for the game
+    /// * `skip` - Number of reviews to skip (for pagination)
+    /// * `limit` - Maximum number of reviews to return
+    ///
+    /// # Returns
+    /// * `Vec<Review>` - Collection of reviews, empty if none found
     fn get_reviews(env: Env, game_id: u32, skip: u32, limit: u32) -> Vec<Review> {
         let total_reviews = GameReviewStorage::get_review_count(&env, game_id);
         let mut reviews = Vec::new(&env);
@@ -194,20 +265,52 @@ impl GameReviewTrait for GameReview {
         reviews
     }
 
+    /// Checks if a user has already reviewed a specific game
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    /// * `user` - Address of the potential reviewer
+    /// * `game_id` - Unique identifier for the game
+    ///
+    /// # Returns
+    /// * `bool` - true if user has already reviewed, false otherwise
     fn has_reviewed(env: Env, user: Address, game_id: u32) -> bool {
         // Try to get the review and return true if it exists, false otherwise
         let key = types::DataKey::Reviews(game_id, user.clone());
         env.storage().persistent().has(&key)
     }
 
+    /// Gets the total number of reviews for a game
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    /// * `game_id` - Unique identifier for the game
+    ///
+    /// # Returns
+    /// * `u32` - Number of reviews (0 if none)
     fn get_game_review_count(env: Env, game_id: u32) -> u32 {
         GameReviewStorage::get_review_count(&env, game_id)
     }
 
+    /// Gets the average rating for a game
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    /// * `game_id` - Unique identifier for the game
+    ///
+    /// # Returns
+    /// * `u32` - Average rating from 1-5 (0 if no reviews)
     fn get_game_rating(env: Env, game_id: u32) -> u32 {
         GameReviewStorage::get_average_rating(&env, game_id)
     }
 
+    /// Gets the current admin address
+    ///
+    /// # Arguments
+    /// * `env` - The contract environment
+    ///
+    /// # Returns
+    /// * `Result<Address, GameReviewError>` - Admin address if found, Error if not initialized
     fn get_admin(env: Env) -> Result<Address, GameReviewError> {
         if !env.storage().instance().has(&types::DataKey::Admin) {
             return Err(GameReviewError::Unauthorized);
@@ -218,7 +321,13 @@ impl GameReviewTrait for GameReview {
 }
 
 impl GameReview {
-    // Helper function to check if the contract is initialized and get admin
+    /// Helper function to validate admin access
+    ///
+    /// # Arguments
+    /// * `env` - Reference to the contract environment
+    ///
+    /// # Returns
+    /// * `Result<Address, GameReviewError>` - Admin address if valid, Error if unauthorized
     fn require_admin(env: &Env) -> Result<Address, GameReviewError> {
         if !env.storage().instance().has(&types::DataKey::Admin) {
             return Err(GameReviewError::Unauthorized);
