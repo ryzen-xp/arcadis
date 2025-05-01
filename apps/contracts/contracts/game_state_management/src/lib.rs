@@ -1,5 +1,5 @@
 #![no_std]
-use soroban_sdk::{contract, contractimpl, Env, Address, BytesN, String, Vec};
+use soroban_sdk::{contract, contractimpl, Env, Address, BytesN, String, Vec,Symbol};
 
 mod save;
 mod world;
@@ -22,7 +22,7 @@ impl GameStateContract {
         world::update_world_state(&env, region_id, state_data)
     }
 
-    pub fn log_event(env: Env, player: Address, event_type: String, metadata: BytesN<64>) -> String {
+    pub fn log_event(env: Env, player: Address, event_type: Symbol, metadata: BytesN<64>) -> String {
         events::log_event(&env, player, event_type, metadata)
     }
 

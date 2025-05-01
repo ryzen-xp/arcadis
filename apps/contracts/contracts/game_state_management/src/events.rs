@@ -3,14 +3,14 @@
 extern crate alloc;
 use alloc::{string::ToString, vec::Vec as StdVec};
 
-use soroban_sdk::{contracttype, Address, Bytes, BytesN, Env, FromVal, IntoVal, String, Vec};
+use soroban_sdk::{contracttype, Address, Bytes, BytesN, Env, FromVal, IntoVal, String, Symbol, Vec};
 
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct GameEvent {
     pub event_id: String,
     pub player: Address,
-    pub event_type: String,
+    pub event_type: Symbol, 
     pub metadata: BytesN<64>,
     pub timestamp: u64,
 }
@@ -20,7 +20,7 @@ const EVENT_KEY: &str = "EVENTS";
 pub fn log_event(
     env: &Env,
     player: Address,
-    event_type: String,
+    event_type: Symbol, 
     metadata: BytesN<64>,
 ) -> String {
     player.require_auth();
@@ -48,7 +48,7 @@ pub fn log_event(
     let event = GameEvent {
         event_id: event_id.clone(),
         player,
-        event_type,
+        event_type, 
         metadata,
         timestamp,
     };
