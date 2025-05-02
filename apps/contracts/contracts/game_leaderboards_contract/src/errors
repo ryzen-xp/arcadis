@@ -1,0 +1,12 @@
+use soroban_sdk::contracterror;
+
+#[contracterror]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+#[repr(u32)]
+pub enum Error {
+    BoardNotFound = 1,
+    TournamentNotFound = 2,
+    PlayerNotFound = 3,
+    InvalidScore = 4,
+    InvalidTournament = 5,
+}
