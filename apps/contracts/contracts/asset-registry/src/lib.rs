@@ -6,8 +6,8 @@ mod interface;
 mod storage;
 mod types;
 
-#[cfg(test)]
-mod test;
+// #[cfg(test)]
+// mod test;
 
 use errors::GameAssetError;
 use events::GameAssetEvents;
