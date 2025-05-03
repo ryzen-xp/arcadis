@@ -3,26 +3,21 @@
 extern crate alloc;
 use alloc::{string::ToString, vec::Vec as StdVec};
 
-use soroban_sdk::{contracttype, Address, Bytes, BytesN, Env, FromVal, IntoVal, String, Symbol, Vec};
+use soroban_sdk::{contracttype, Address, Bytes, BytesN, Env, FromVal, String, Symbol, Vec};
 
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct GameEvent {
     pub event_id: String,
     pub player: Address,
-    pub event_type: Symbol, 
+    pub event_type: Symbol,
     pub metadata: BytesN<64>,
     pub timestamp: u64,
 }
 
-const EVENT_KEY: &str = "EVENTS";
+const EVENT_KEY: Symbol = Symbol::short("EVENT");
 
-pub fn log_event(
-    env: &Env,
-    player: Address,
-    event_type: Symbol, 
-    metadata: BytesN<64>,
-) -> String {
+pub fn log_event(env: &Env, player: Address, event_type: Symbol, metadata: BytesN<64>) -> String {
     player.require_auth();
     let timestamp = env.ledger().timestamp();
 
@@ -48,17 +43,18 @@ pub fn log_event(
     let event = GameEvent {
         event_id: event_id.clone(),
         player,
-        event_type, 
+        event_type,
         metadata,
         timestamp,
     };
 
-    let mut events: Vec<GameEvent> = env.storage().persistent()
-        .get(&String::from_str(env, EVENT_KEY))
+    let mut events: Vec<GameEvent> = env
+        .storage()
+        .persistent()
+        .get(&EVENT_KEY)
         .unwrap_or(Vec::new(env));
     events.push_back(event.clone());
-    env.storage().persistent()
-        .set(&String::from_str(env, EVENT_KEY), &events);
+    env.storage().persistent().set(&EVENT_KEY, &events);
 
     event_id
 }
@@ -68,8 +64,10 @@ pub fn get_event_log(
     player: Option<Address>,
     region_id: Option<String>,
 ) -> Vec<GameEvent> {
-    let events: Vec<GameEvent> = env.storage().persistent()
-        .get(&String::from_str(env, EVENT_KEY))
+    let events: Vec<GameEvent> = env
+        .storage()
+        .persistent()
+        .get(&EVENT_KEY)
         .unwrap_or(Vec::new(env));
 
     let mut filtered = Vec::new(env);
