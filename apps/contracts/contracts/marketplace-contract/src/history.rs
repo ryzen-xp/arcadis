@@ -1,6 +1,4 @@
-#![no_std]
 use soroban_sdk::{Env, Map, String, Vec};
-
 use crate::utils::{DataKey, Error, TradeHistory};
 
 pub fn get_trade_history(e: Env, item_id: String) -> Result<Vec<TradeHistory>, Error> {

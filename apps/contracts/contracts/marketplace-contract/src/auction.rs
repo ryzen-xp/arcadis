@@ -1,4 +1,3 @@
-#![no_std]
 use soroban_sdk::{Address, Env, Map, String, Symbol};
 
 use crate::utils::{Auction, DataKey, Error, GameItem};

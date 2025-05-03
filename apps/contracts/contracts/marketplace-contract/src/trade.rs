@@ -1,6 +1,4 @@
-#![no_std]
 use soroban_sdk::{Address, Env, Map, String, Symbol, Vec};
-
 use crate::escrow::{deposit_escrow, withdraw_escrow};
 use crate::utils::{DataKey, Error, GameItem, TradeHistory, TradeOffer};
 
@@ -25,7 +23,7 @@ pub fn create_trade_offer(
         None => Map::new(&e),
     };
 
-    let mut tradeOffer: Map<String, TradeOffer> = match e.storage().instance().get(&trade_offer_key)
+    let mut trade_offer: Map<String, TradeOffer> = match e.storage().instance().get(&trade_offer_key)
     {
         Some(x) => x,
         None => Map::new(&e),
@@ -43,7 +41,7 @@ pub fn create_trade_offer(
         return Err(Error::ItemAlreadyListed);
     }
 
-    if tradeOffer.get(item_id.clone()).unwrap().is_active {
+    if trade_offer.get(item_id.clone()).unwrap().is_active {
         return Err(Error::ItemAlreadyListed);
     }
 
@@ -54,10 +52,10 @@ pub fn create_trade_offer(
         is_active: true,
     };
 
-    tradeOffer.set(item_id.clone(), instance_trade_offer.clone());
+    trade_offer.set(item_id.clone(), instance_trade_offer.clone());
     listed.set(item_id.clone(), true);
 
-    e.storage().instance().set(&trade_offer_key, &tradeOffer);
+    e.storage().instance().set(&trade_offer_key, &trade_offer);
     e.storage().instance().set(&listed_key, &listed);
 
     e.events().publish(

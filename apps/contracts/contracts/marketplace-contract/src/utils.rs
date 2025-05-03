@@ -1,4 +1,3 @@
-#![no_std]
 use soroban_sdk::{contracterror, contracttype, Address, BytesN, String};
 
 #[derive(Clone, Debug, PartialEq, Eq)]

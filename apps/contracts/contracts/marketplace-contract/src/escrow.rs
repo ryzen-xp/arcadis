@@ -1,6 +1,4 @@
-#![no_std]
 use soroban_sdk::{token, Address, Env, Map};
-
 use crate::utils::{DataKey, Error, EscrowBalance};
 
 pub fn internal_get_token(e: &Env) -> Result<Address, Error> {
