@@ -16,7 +16,7 @@ pub fn submit_score(
     let new_entry = LeaderboardEntry {
         player_id,
         total_score: score,
-        rank: 0, // Rank will be determined after insertion
+        rank: 1, // Rank will be determined after insertion
     };
 
     // Insert the new entry into the correct position in the Vec
