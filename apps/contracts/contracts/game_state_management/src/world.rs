@@ -8,10 +8,11 @@ pub struct WorldState {
     pub last_updated: u64,
 }
 
-const WORLD_KEY: soroban_sdk::Symbol = Symbol::short("WORLD");
+
 
 pub fn update_world_state(env: &Env, region_id: String, state_data: BytesN<64>) {
     let timestamp = env.ledger().timestamp();
+    let  world_key: soroban_sdk::Symbol = Symbol::new(&env ,"WORLD");
 
     let world_state = WorldState {
         region_id: region_id.clone(),
@@ -22,7 +23,7 @@ pub fn update_world_state(env: &Env, region_id: String, state_data: BytesN<64>) 
     let mut world_states: Vec<WorldState> = env
         .storage()
         .persistent()
-        .get(&WORLD_KEY)
+        .get(&world_key)
         .unwrap_or(Vec::new(&env));
 
     if let Some(index) = world_states.iter().position(|ws| ws.region_id == region_id) {
@@ -31,5 +32,5 @@ pub fn update_world_state(env: &Env, region_id: String, state_data: BytesN<64>) 
         world_states.push_back(world_state);
     }
 
-    env.storage().persistent().set(&WORLD_KEY, &world_states);
+    env.storage().persistent().set(&world_key, &world_states);
 }
