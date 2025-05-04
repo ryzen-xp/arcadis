@@ -60,7 +60,7 @@ impl VotingTrait for VotingContract {
 
         // Emit event signaling new game added
         env.events().publish(
-            (Symbol::new(&env, "gnew_game_added"), creator.clone()),
+            (Symbol::new(&env, "new_game_added"), creator.clone()),
             NewGameAdded { game_id, creator },
         );
     }
