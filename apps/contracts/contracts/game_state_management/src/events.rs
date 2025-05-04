@@ -15,11 +15,11 @@ pub struct GameEvent {
     pub timestamp: u64,
 }
 
-const EVENT_KEY: Symbol = Symbol::short("EVENT");
 
 pub fn log_event(env: &Env, player: Address, event_type: Symbol, metadata: BytesN<64>) -> String {
     player.require_auth();
     let timestamp = env.ledger().timestamp();
+    let  event_key: Symbol = Symbol::new(&env , "EVENT");
 
     // Convert Address to raw 32-byte array
     let addr_bytesn: BytesN<32> = BytesN::from_val(env, &player.to_val());
@@ -51,10 +51,10 @@ pub fn log_event(env: &Env, player: Address, event_type: Symbol, metadata: Bytes
     let mut events: Vec<GameEvent> = env
         .storage()
         .persistent()
-        .get(&EVENT_KEY)
+        .get(&event_key)
         .unwrap_or(Vec::new(env));
     events.push_back(event.clone());
-    env.storage().persistent().set(&EVENT_KEY, &events);
+    env.storage().persistent().set(&event_key, &events);
 
     event_id
 }
@@ -64,10 +64,11 @@ pub fn get_event_log(
     player: Option<Address>,
     region_id: Option<String>,
 ) -> Vec<GameEvent> {
+    let  event_key: Symbol = Symbol::new(&env , "EVENT");
     let events: Vec<GameEvent> = env
         .storage()
         .persistent()
-        .get(&EVENT_KEY)
+        .get(&event_key)
         .unwrap_or(Vec::new(env));
 
     let mut filtered = Vec::new(env);
