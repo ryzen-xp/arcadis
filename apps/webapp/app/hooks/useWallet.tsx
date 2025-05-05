@@ -1,6 +1,6 @@
 "use client";
 
-import { useWalletContext } from "../context/walletContext";
+import { useWalletContext } from "../../context/walletContext";
 import {
   WalletNetwork,
   ISupportedWallet
