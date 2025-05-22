@@ -1,7 +1,12 @@
 #![no_std]
 
+extern crate alloc;
+
 use soroban_sdk::{contract, contractimpl, Address, BytesN, Env, String};
 use types::{AccessLevel, PlayerProfile, ADMIN_KEY, PLAYER_COUNTER_KEY};
+
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 mod achievements;
 mod identity;

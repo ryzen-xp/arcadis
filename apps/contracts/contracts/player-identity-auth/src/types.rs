@@ -43,4 +43,3 @@ pub enum Error {
 
 pub const ADMIN_KEY: Symbol = symbol_short!("ADMIN");
 pub const PLAYER_COUNTER_KEY: Symbol = symbol_short!("PLYR_CNT");
-pub const PLAYER_PROFILE_KEY: Symbol = symbol_short!("PLAYER");

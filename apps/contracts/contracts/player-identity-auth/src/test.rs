@@ -4,15 +4,13 @@ use crate::identity::IdentityManager;
 use crate::types::{AccessLevel, Error};
 use crate::types::{ADMIN_KEY, PLAYER_COUNTER_KEY};
 use soroban_sdk::{
-    testutils::{Address as _, Ledger},
+    testutils::Address as _,
     BytesN, Env, String,
 };
 
 /// Test Constants
 const MAX_USERNAME_LENGTH: u32 = 50;
 const MAX_TITLE_LENGTH: u32 = 100;
-const MAX_DESCRIPTION_LENGTH: u32 = 500;
-const MAX_GAME_ID_LENGTH: u32 = 50;
 
 /// Create a test environment with the necessary contract and client
 fn create_test_contracts(env: &Env) -> (Address, PlayerIdentityAuthClient) {
@@ -68,7 +66,7 @@ fn test_create_profile_success() {
     let env = Env::default();
     env.mock_all_auths();
 
-    let (contract_id, client) = create_test_contracts(&env);
+    let (_, client) = create_test_contracts(&env);
     let (player_id, username, credentials_hash) = setup_profile_args(&env);
     let admin = Address::generate(&env);
 

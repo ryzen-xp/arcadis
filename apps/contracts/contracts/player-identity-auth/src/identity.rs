@@ -1,5 +1,3 @@
-extern crate alloc;
-
 use crate::types::{AccessLevel, Achievement, Error, PlayerProfile, ADMIN_KEY, PLAYER_COUNTER_KEY};
 use soroban_sdk::{log, symbol_short, vec, Address, BytesN, Env, String, Symbol, Vec};
 
