@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter } from 'next/font/google'
 import { Header } from '@/components/Header'
 import './globals.css'
 import { MenuProvider } from '@/context/MenuContext'
+import { WalletProvider } from "@/context/walletContext";
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -28,12 +29,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 	return (
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}>
-				<MenuProvider>
-					<Header />
-					<div className="pt-16">
-						{children}
-					</div>
-				</MenuProvider>
+				<WalletProvider>
+					<MenuProvider>
+						<Header />
+						<div className="pt-16">
+							{children}
+						</div>
+					</MenuProvider>
+				</WalletProvider>
 			</body>
 		</html>
 	)

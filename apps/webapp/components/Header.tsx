@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { useMenu } from '@/context/MenuContext'
+import { WalletConnectButton } from "@/components/WalletConnectButton"
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -146,9 +147,7 @@ export function Header() {
 
           {/* Connect Button */}
           <div className="flex items-center w-[100px] justify-end">
-            <button className="bg-gradient-to-r from-[#3B82F6] to-[#0E7490] text-white px-4 py-2 rounded-full text-[13.67px] leading-[20px] font-medium transition-all duration-300 hover:opacity-90">
-              Connect
-            </button>
+            <WalletConnectButton />
           </div>
         </div>
       </nav>
