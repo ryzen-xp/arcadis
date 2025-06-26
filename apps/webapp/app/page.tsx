@@ -6,7 +6,6 @@ import { ArrowRight, DiscIcon as Discord, Github, Twitter } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 import { PageWrapper } from '@/components/PageWrapper'
-import GameInfoCard from '@/components/gamecardinfo'
 import FeatureSteps from '@/components/FeatureSteps'
 import SearchGamesBar from '@/components/SearchGamesBar'
 
@@ -91,9 +90,6 @@ export default function Home() {
 					transition={{ duration: 0.8 }}
 					className="max-w-4xl mx-auto text-center space-y-8"
 				>
-					<div className="inline-block px-4 py-1.5 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full backdrop-blur-sm border border-blue-500/20 text-blue-300 mb-4">
-						{days} days until launch
-					</div>
 
 					<h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-8">
 						Coming Soon{' '}
@@ -201,21 +197,6 @@ export default function Home() {
 						</div>
 					))}
 				</motion.div>
-				
-				{/* Game Info Card */}
-				<GameInfoCard
-					image="https://yourimage.com/game.jpg"
-					title="Eternal Legends"
-					developer={{ name: "Blockchain Gaming Inc", url: "#", logo: "https://yourlogo.com/logo.png" }}
-					rating={9}
-					status="active"
-					description="Enter a persistent world where every player's actions leave a lasting impact."
-					players={800000}
-					community={1500000}
-					categories={["MMORPG", "BLOCKCHAIN", "FANTASY"]}
-					platforms={["PC", "PlayStation", "Xbox"]}
-					showFeedback={true}
-				/>
 				
 				{/* Social links */}
 				<motion.div
